@@ -48,18 +48,46 @@ class ListNode {
 
 // MARK: - Solution
 
-func solution1(_ l1: ListNode?, _l2: ListNode?) -> ListNode? {
+func solution1(_ l1: ListNode, _ l2: ListNode) -> ListNode? {
     return ListNode()
 }
 
 // MARK: - Test
 
-class Test: XCTestCase {
+class TestSolution1: XCTestCase {
     
-    func testExample1() {}
+    func test1() {
+        let l1 = ListNode(2, ListNode(4, ListNode(3)))
+        let l2 = ListNode(5, ListNode(6, ListNode(4)))
+        let result = solution1(l1, l2)
+        XCTAssertEqual(linkedListToArray(result), [7, 0, 8], "Expected [7, 0, 8]")
+    }
     
+    func test2() {
+        let l1 = ListNode(0)
+        let l2 = ListNode(0)
+        let result = solution1(l1, l2)
+        XCTAssertEqual(linkedListToArray(result), [0], "Expected [0]")
+    }
+    
+    func test3() {
+        let l1 = ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9)))))))
+        let l2 = ListNode(9, ListNode(9, ListNode(9, ListNode(9))))
+        let result = solution1(l1, l2)
+        XCTAssertEqual(linkedListToArray(result), [8,9,9,9,0,0,0,1], "Expected [8,9,9,9,0,0,0,1]")
+    }
+}
+
+func linkedListToArray(_ node: ListNode?) -> [Int] {
+    var result: [Int] = []
+    var current = node
+    while let n = current {
+        result.append(n.val)
+        current = n.next
+    }
+    return result
 }
 
 // MARK: - Run
 
-Test.defaultTestSuite.run()
+TestSolution1.defaultTestSuite.run()
